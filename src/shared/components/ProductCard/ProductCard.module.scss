@@ -1,0 +1,182 @@
+@use '../../../styles/mixins' as *;
+
+.card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-surface);
+  border-radius: 8px;
+  padding: 32px;
+  border: 2px solid var(--color-elements);
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-6px);
+    border-color: var(--text-main);
+  }
+
+   :global(.dark-theme) & {
+    border: transparent;
+
+    &:hover {
+      box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15);
+    }
+  }
+}
+
+.imageWrapper {
+  width: 100%;
+  height: 200px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.title {
+  font-size: 14px;
+  line-height: 21px;
+  min-height: 42px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--text-main);
+}
+
+.prices {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.price {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 140%;
+}
+
+.fullPrice {
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 100%;
+  text-decoration: line-through;
+  color: var(--text-secondary)
+}
+
+.divider {
+  border: none;
+  background-color: var(--color-elements);
+  height: 1.5px;
+  margin: 8px 0;
+}
+
+.specs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.specItem {
+  display: flex;
+  justify-content: space-between;
+}
+
+.specName {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 100%;
+  color: var(--text-secondary)
+}
+
+.specValue {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 100%;
+  color: var(--text-main)
+}
+
+.buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.addToCartBtn {
+  flex: 1;
+  background-color: var(--color-accent);
+  color: #fff;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+  outline: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+
+  :global(.dark-theme) & {
+    &:hover {
+      box-shadow: 0 4px 16px rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+.favoritesBtn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border-radius: 6px;
+  border: 2px solid var(--color-icons);
+  outline: none;
+  backface-visibility: hidden;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: var(--text-main);
+
+    .favoritesIcon {
+      background-color: #EB5757;
+      mask-image: url('/icons/heart-filled.svg');
+    }
+  }
+
+  &:active {
+    transform: translateY(2px);
+  }
+
+  :global(.dark-theme) & {
+    border-color: transparent;
+    background-color: var(--color-icons);
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-color: var(--text-main);
+      background-color: var(--bg-hover);
+
+      .favoritesIcon {
+        background-color: #EB5757;
+        mask-image: url('/icons/heart-filled.svg');
+      }
+    }
+  }
+}
+
+.favoritesIcon {
+  @include icon-mask('/icons/heart.svg', 16px);
+}
