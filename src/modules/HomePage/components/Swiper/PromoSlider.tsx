@@ -12,7 +12,10 @@ export const PromoSlider = () => {
   return (
     <div className={styles.bannerSection}>
       <div className={styles.sliderWrapper}>
-        <button className={classNames(styles.arrowBtn, 'custom-prev')}>
+        <button
+          type="button"
+          className={classNames(styles.arrowBtn, 'custom-prev')}
+        >
           <span className={styles.leftArrow} aria-label="Arrow left" />
         </button>
         <Swiper
@@ -57,7 +60,10 @@ export const PromoSlider = () => {
             />
           </SwiperSlide>
         </Swiper>
-        <button className={classNames(styles.arrowBtn, 'custom-next')}>
+        <button
+          type="button"
+          className={classNames(styles.arrowBtn, 'custom-next')}
+        >
           <span className={styles.rightArrow} aria-label="Arrow right" />
         </button>
       </div>

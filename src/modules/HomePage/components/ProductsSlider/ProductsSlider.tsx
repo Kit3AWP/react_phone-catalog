@@ -27,10 +27,16 @@ export const ProductsSlider = ({
         <h2 className={styles.sectionTitle}>{title}</h2>
 
         <div className={styles.buttons}>
-          <button className={`${styles.navButton} ${sliderId}-prev`}>
+          <button
+            type="button"
+            className={`${styles.navButton} ${sliderId}-prev`}
+          >
             <span className={styles.leftArrow} aria-label="Left arrow" />
           </button>
-          <button className={`${styles.navButton} ${sliderId}-next`}>
+          <button
+            type="button"
+            className={`${styles.navButton} ${sliderId}-next`}
+          >
             <span className={styles.rightArrow} aria-label="Right arrow" />
           </button>
         </div>

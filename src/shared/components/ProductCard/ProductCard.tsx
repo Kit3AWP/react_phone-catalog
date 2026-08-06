@@ -56,8 +56,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       </div>
 
       <div className={styles.buttons}>
-        <button className={styles.addToCartBtn}>Add to cart</button>
-        <button className={styles.favoritesBtn}>
+        <button type="button" className={styles.addToCartBtn}>
+          Add to cart
+        </button>
+        <button type="button" className={styles.favoritesBtn}>
           <span className={styles.favoritesIcon} aria-label="Favorites" />
         </button>
       </div>
