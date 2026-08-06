@@ -23,7 +23,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <article className={styles.card}>
       <div className={styles.imageWrapper}>
-        <img src={imageUrl} alt={name} className={styles.image} />
+        <img
+          src={`${import.meta.env.BASE_URL}${imageUrl}`}
+          alt={name}
+          className={styles.image}
+        />
       </div>
 
       <h3 className={styles.title}>{name}</h3>

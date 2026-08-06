@@ -36,7 +36,7 @@ export const PromoSlider = () => {
           <SwiperSlide>
             <img
               className={styles.bannerImg}
-              src="/img/banner-tablet-1.png"
+              src="./img/banner-tablet-1.png"
               alt="iPhone 14"
             />
           </SwiperSlide>
@@ -44,7 +44,7 @@ export const PromoSlider = () => {
           <SwiperSlide>
             <img
               className={styles.bannerImg}
-              src="/img/banner-tablet-2.png"
+              src="./img/banner-tablet-2.png"
               alt="Tablets"
             />
           </SwiperSlide>
@@ -52,7 +52,7 @@ export const PromoSlider = () => {
           <SwiperSlide>
             <img
               className={styles.bannerImg}
-              src="/img/banner-tablet-3.png"
+              src="./img/banner-tablet-3.png"
               alt="Accessories"
             />
           </SwiperSlide>

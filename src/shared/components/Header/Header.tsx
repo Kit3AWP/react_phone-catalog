@@ -25,12 +25,12 @@ export const Header = () => {
       <div className={styles.leftSection}>
         <Link to="/" className={styles.logo}>
           <img
-            src="/icons/logoLightTheme.svg"
+            src="./icons/logoLightTheme.svg"
             alt="Phone Catalog logo"
             className={classNames(styles.logoImg, styles.lightLogo)}
           />
           <img
-            src="/icons/logoDarkTheme.svg"
+            src="./icons/logoDarkTheme.svg"
             alt="Phone Catalog logo"
             className={classNames(styles.logoImg, styles.darkLogo)}
           />
@@ -109,12 +109,12 @@ export const Header = () => {
           <div className={styles.mobileTopBar}>
             <Link to="/" className={styles.logo} onClick={closeMenu}>
               <img
-                src="/icons/logoLightTheme.svg"
+                src="./icons/logoLightTheme.svg"
                 alt="Phone Catalog logo"
                 className={classNames(styles.logoImg, styles.lightLogo)}
               />
               <img
-                src="/icons/logoDarkTheme.svg"
+                src="./icons/logoDarkTheme.svg"
                 alt="Phone Catalog logo"
                 className={classNames(styles.logoImg, styles.darkLogo)}
               />

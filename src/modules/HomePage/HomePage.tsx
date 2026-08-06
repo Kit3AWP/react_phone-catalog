@@ -14,7 +14,9 @@ export const HomePage = () => {
       try {
         setIsLoading(true);
 
-        const response = await fetch('/api/products.json');
+        const response = await fetch(
+          `${import.meta.env.BASE_URL}api/products.json`,
+        );
         const data = await response.json();
 
         setProducts(data);
@@ -120,7 +122,7 @@ export const HomePage = () => {
         <div className={styles.imgLinks}>
           <Link to="/phones" className={styles.linkCard}>
             <img
-              src="/img/Phones.png"
+              src="./img/Phones.png"
               alt="Phones"
               className={styles.cardImg}
             />
@@ -129,7 +131,7 @@ export const HomePage = () => {
           </Link>
           <Link to="/tablets" className={styles.linkCard}>
             <img
-              src="/img/Tablets.png"
+              src="./img/Tablets.png"
               alt="Tablets"
               className={styles.cardImg}
             />
@@ -138,7 +140,7 @@ export const HomePage = () => {
           </Link>
           <Link to="/accessories" className={styles.linkCard}>
             <img
-              src="/img/Accessories.png"
+              src="./img/Accessories.png"
               alt="Accessories"
               className={styles.cardImg}
             />
