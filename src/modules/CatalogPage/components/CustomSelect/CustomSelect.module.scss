@@ -1,0 +1,114 @@
+@use '../../../../styles/mixins' as *;
+
+.selectContainer {
+  position: relative;
+  width: 176px;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 100%;
+  color: var(--text-secondary);
+  margin: 0 0 4px;
+}
+
+.trigger {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 12px;
+  background-color: var(--bg-surface);
+  color: var(--text-main);
+  border-radius: 6px;
+  border: 2px solid var(--color-icons);
+  transition: all 0.3s ease;
+
+  &:hover,
+  &:focus,
+  &.triggerActive {
+    background-color: var(--bg-hover);
+    border-color: var(--accent-color);
+  }
+
+  :global(.dark-theme) & {
+    background-color: var(--color-icons);
+    border-color: transparent;
+
+    &:hover {
+      background-color: var(--bg-hover);
+      border-color: var(--text-main);
+    }
+
+    &:focus,
+    &.triggerActive {
+      border-color: var(--color-accent);
+    }
+  }
+}
+
+.dropdownList {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  border: 2px solid var(--color-icons);
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background-color: var(--bg-surface);
+
+  :global(.dark-theme) & {
+    background-color: var(--color-icons);
+    border-color: var(--color-icons);
+  }
+}
+
+.option {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--text-secondary);
+  background-color: var(--bg-surface);
+
+  &:hover {
+    background-color: var(--bg-hover);
+    color: var(--text-main);
+  }
+
+  &.selected {
+    color: var(--text-main);
+  }
+
+  :global(.dark-theme) & {
+    background-color: var(--bg-surface);
+    color: var(--text-main);
+
+    &:hover {
+      background-color: var(--bg-hover);
+    }
+
+    &.selected {
+     color: var(--color-accent);
+  }
+  }
+}
+
+.downArrowIcon {
+  @include icon-mask('/icons/downArrow.svg', 16px);
+
+  transition: transform 0.3s ease;
+
+  &.rotated {
+    transform: rotate(180deg);
+  }
+}

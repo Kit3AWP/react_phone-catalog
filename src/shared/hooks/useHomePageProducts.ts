@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Product } from '../../types/Product';
+import { Product } from '../types/Product';
 
 const MAX_DISPLAY_ITEMS = 16;
 const NEW_MODEL_YEAR_THRESHOLD = 2022;

@@ -6,7 +6,11 @@ import styles from './ProductsSlider.module.scss';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css';
-import { Product } from '../../../../types/Product';
+import { Product } from '../../../../shared/types/Product';
+// eslint-disable-next-line max-len
+import { useHomePageProducts } from '../../../../shared/hooks/useHomePageProducts';
+// eslint-disable-next-line max-len
+import { SkeletonCardLoader } from '../../../../shared/components/SkeletonCardLoader';
 
 interface ProductsSliderProps {
   title: string;
@@ -21,6 +25,8 @@ export const ProductsSlider = ({
   sliderId,
   hideFullPrice,
 }: ProductsSliderProps) => {
+  const { isLoading } = useHomePageProducts();
+
   return (
     <section className={styles.productsSection}>
       <div className={styles.header}>
@@ -60,20 +66,23 @@ export const ProductsSlider = ({
             },
           }}
         >
-          {products.map(product => (
-            <SwiperSlide key={product.id}>
-              <ProductCard
-                key={product.id}
-                name={product.name}
-                price={product.price}
-                fullPrice={hideFullPrice ? undefined : product.fullPrice}
-                screen={product.screen}
-                capacity={product.capacity}
-                ram={product.ram}
-                imageUrl={product.image}
-              />
-            </SwiperSlide>
-          ))}
+          {isLoading &&
+            Array.from({ length: 4 }).map((_, i) => (
+              <SwiperSlide key={i}>
+                <SkeletonCardLoader key={i} />
+              </SwiperSlide>
+            ))}
+
+          {!isLoading &&
+            products.map(product => (
+              <SwiperSlide key={product.id}>
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  hideFullPrice={hideFullPrice}
+                />
+              </SwiperSlide>
+            ))}
         </Swiper>
       </div>
     </section>

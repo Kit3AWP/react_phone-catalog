@@ -1,11 +1,15 @@
 @use '../../styles/mixins' as *;
 
 .homeIcon {
-  @include icon-mask('./icons/Home.svg', 16px);
+  @include icon-mask('/icons/Home.svg', 16px);
+
+  &:hover {
+    background-color: var(--color-accent);
+  }
 }
 
 .rightArrowIcon {
-  @include icon-mask('./icons/rightArrow.svg', 16px);
+  @include icon-mask('/icons/rightArrow.svg', 16px);
 
   background-color: var(--color-icons);
 }
@@ -45,6 +49,10 @@
   font-size: 48px;
   line-height: 56px;
   letter-spacing: -1%;
+
+  @include on-phone {
+    font-size: 32px;
+  }
 }
 
 .modelsCount {
@@ -61,4 +69,31 @@
   margin: 0;
   margin-top: 40px;
   gap: 16px;
+}
+
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+
+  @include on-tablet {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include on-small-tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include on-phone {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  margin-top: 40px;
 }

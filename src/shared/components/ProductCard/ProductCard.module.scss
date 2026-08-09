@@ -1,5 +1,9 @@
 @use '../../../styles/mixins' as *;
 
+.favoritesIcon {
+  @include icon-mask('/icons/heart.svg', 16px);
+}
+
 .card {
   min-width: 0;
   display: flex;
@@ -73,7 +77,7 @@
 .divider {
   border: none;
   background-color: var(--color-elements);
-  height: 1.5px;
+  height: 2px;
   margin: 8px 0;
 }
 
@@ -175,8 +179,4 @@
       }
     }
   }
-}
-
-.favoritesIcon {
-  @include icon-mask('/icons/heart.svg', 16px);
 }

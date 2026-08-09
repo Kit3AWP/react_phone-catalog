@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import React from 'react';
 import styles from './CustomSelect.module.scss';
 import classNames from 'classnames';
@@ -10,11 +10,42 @@ interface CustomSelectProps {
   onChange: (newValue: string) => void;
 }
 
-export const CustomSelect = ({ label, options, value }: CustomSelectProps) => {
+export const CustomSelect = ({
+  label,
+  options,
+  value,
+  onChange,
+}: CustomSelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleOptionClick = (option: string) => {
+    onChange(option);
+    setIsOpen(false);
+  };
+
+  const selectRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (
+        event.target &&
+        selectRef.current &&
+        !selectRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className={styles.selectContainer}>
+    <div className={styles.selectContainer} ref={selectRef}>
       <p className={styles.label}>{label}</p>
 
       <button

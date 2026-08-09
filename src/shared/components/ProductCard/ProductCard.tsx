@@ -1,30 +1,23 @@
 import React from 'react';
 import styles from './ProductCard.module.scss';
+import { Product } from '../../types/Product';
 
 interface ProductCardProps {
-  imageUrl: string;
-  name: string;
-  price: number;
-  fullPrice?: number;
-  screen: string;
-  capacity: string;
-  ram: string;
+  product: Product;
+  hideFullPrice?: boolean;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({
-  imageUrl,
-  name,
-  price,
-  fullPrice,
-  screen,
-  capacity,
-  ram,
+  product,
+  hideFullPrice,
 }) => {
+  const { image, name, price, fullPrice, screen, capacity, ram } = product;
+
   return (
     <article className={styles.card}>
       <div className={styles.imageWrapper}>
         <img
-          src={`${import.meta.env.BASE_URL}${imageUrl}`}
+          src={`${import.meta.env.BASE_URL}${image}`}
           alt={name}
           className={styles.image}
         />
@@ -34,7 +27,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
       <div className={styles.prices}>
         <span className={styles.price}>${price}</span>
-        {fullPrice && <span className={styles.fullPrice}>${fullPrice}</span>}
+        {!hideFullPrice && fullPrice && (
+          <span className={styles.fullPrice}>${fullPrice}</span>
+        )}
       </div>
       <hr className={styles.divider} />
 
