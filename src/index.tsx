@@ -3,9 +3,12 @@ import { App } from './App';
 import React from 'react';
 import { HashRouter } from 'react-router-dom';
 import './styles/global.scss';
+import { FavoritesProvider } from './modules/FavoritesPage/FavoritesContext';
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <HashRouter>
-    <App />
+    <FavoritesProvider>
+      <App />
+    </FavoritesProvider>
   </HashRouter>,
 );

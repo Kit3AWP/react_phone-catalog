@@ -20,11 +20,11 @@
   padding: 24px 32px 80px;
 
   @include on-tablet {
-    padding: 0 24px 64px;
+    padding: 24px 24px 64px;
   }
 
   @include on-phone {
-    padding: 0 16px 64px;
+    padding: 16px 16px 64px;
   }
 }
 

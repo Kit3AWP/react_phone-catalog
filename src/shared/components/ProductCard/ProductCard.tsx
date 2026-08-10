@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './ProductCard.module.scss';
 import { Product } from '../../types/Product';
+import { useFavorites } from '../../hooks/useFavorites';
+import classNames from 'classnames';
 
 interface ProductCardProps {
   product: Product;
@@ -12,6 +14,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   hideFullPrice,
 }) => {
   const { image, name, price, fullPrice, screen, capacity, ram } = product;
+  const { favorites, toggleFavorite } = useFavorites();
+
+  const isFavorite = favorites.some(item => item.id === product.id);
 
   return (
     <article className={styles.card}>
@@ -54,7 +59,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         <button type="button" className={styles.addToCartBtn}>
           Add to cart
         </button>
-        <button type="button" className={styles.favoritesBtn}>
+        <button
+          type="button"
+          className={classNames(styles.favoritesBtn, {
+            [styles.active]: isFavorite,
+          })}
+          onClick={() => toggleFavorite(product)}
+        >
           <span className={styles.favoritesIcon} aria-label="Favorites" />
         </button>
       </div>

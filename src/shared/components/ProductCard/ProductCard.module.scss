@@ -153,7 +153,15 @@
 
   &:hover {
     border-color: var(--text-main);
+    background-color: var(--bg-hover);
 
+    .favoritesIcon {
+      background-color: #EB5757;
+      mask-image: url('/icons/heart-filled.svg');
+    }
+  }
+
+  &.active {
     .favoritesIcon {
       background-color: #EB5757;
       mask-image: url('/icons/heart-filled.svg');

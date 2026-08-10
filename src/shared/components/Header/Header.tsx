@@ -3,10 +3,12 @@ import classNames from 'classnames';
 import { Link, NavLink } from 'react-router-dom';
 import styles from './Header.module.scss';
 import { useTheme } from '../../hooks/useTheme';
+import { useFavorites } from '../../hooks/useFavorites';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const { favorites } = useFavorites();
 
   const closeMenu = () => setIsMenuOpen(false);
 
@@ -90,7 +92,14 @@ export const Header = () => {
           }
           aria-label="Favorites"
         >
-          <span className={styles.favoritesIcon} aria-label="Favorites" />
+          <div className={styles.iconWrapper}>
+            <span className={styles.favoritesIcon} aria-label="Favorites" />
+            {favorites.length > 0 && (
+              <span className={styles.badge} aria-label="Favorites badge">
+                {favorites.length}
+              </span>
+            )}
+          </div>
         </NavLink>
 
         <NavLink
@@ -153,7 +162,14 @@ export const Header = () => {
                 })
               }
             >
-              <span className={styles.favoritesIcon} aria-label="Favorites" />
+              <div className={styles.iconWrapper}>
+                <span className={styles.favoritesIcon} aria-label="Favorites" />
+                {favorites.length > 0 && (
+                  <span className={styles.badge} aria-label="Favorites badge">
+                    {favorites.length}
+                  </span>
+                )}
+              </div>
             </NavLink>
             <NavLink
               to="/cart"
