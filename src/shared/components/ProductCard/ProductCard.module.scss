@@ -110,6 +110,7 @@
 .buttons {
   display: flex;
   gap: 8px;
+  cursor: default;
 }
 
 .addToCartBtn {
@@ -157,7 +158,6 @@
 
     .favoritesIcon {
       background-color: #EB5757;
-      mask-image: url('/icons/heart-filled.svg');
     }
   }
 
@@ -183,7 +183,6 @@
 
       .favoritesIcon {
         background-color: #EB5757;
-        mask-image: url('/icons/heart-filled.svg');
       }
     }
   }

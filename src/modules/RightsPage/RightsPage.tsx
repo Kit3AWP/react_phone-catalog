@@ -12,9 +12,7 @@ export const RightsPage = () => {
   return (
     <div className={styles.container}>
       <button className={styles.backButton} onClick={() => navigate(-1)}>
-        <div className={styles.iconContainer}>
-          <span className={styles.leftArrow} aria-label="Left arrow" />
-        </div>
+        <span className={styles.leftArrow} aria-label="Left arrow" />
         <span className={styles.backText}>Back</span>
       </button>
 
