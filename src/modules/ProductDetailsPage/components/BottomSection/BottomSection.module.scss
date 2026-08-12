@@ -1,8 +1,14 @@
+@use 'src/styles/mixins' as *;
+
 .bottomSection {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 64px;
   margin-bottom: 80px;
+
+   @include on-tablet {
+    grid-template-columns: 1fr;
+  }
 }
 
 .aboutColumn {
@@ -13,11 +19,6 @@
     margin-bottom: 16px;
     margin-top: 0;
   }
-}
-
-.techSpecsColumn {
-  display: flex;
-  flex-direction: column;
 }
 
 .descriptionWrapper {

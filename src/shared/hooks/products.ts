@@ -13,25 +13,18 @@ export const getProducts = async (): Promise<Product[]> => {
   return response.json();
 };
 
-export const getProductById = async (productId: string): Promise<Product> => {
-  const allProducts = await getProducts();
-
-  const product = allProducts.find(item => item.itemId === productId);
-
-  if (!product) {
-    throw new Error('Product not found');
-  }
-
-  return product;
-};
-
 export const getProductDetailsById = async (
+  category: string,
   productId: string,
 ): Promise<ProductDetails> => {
-  const response = await fetch(`./api/products/${productId}.json`);
+  const targetCategory = category || 'phones';
+
+  const response = await fetch(`/api/${targetCategory}/${productId}.json`);
 
   if (!response.ok) {
-    throw new Error('Failed to fetch product details');
+    throw new Error(
+      `Failed to fetch details for category "${targetCategory}" and ID "${productId}"`,
+    );
   }
 
   return response.json();

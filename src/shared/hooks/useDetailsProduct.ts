@@ -38,6 +38,7 @@ export const useDetailsProduct = () => {
     isLoading,
     setIsLoading,
     hasError,
+    setHasError,
     productId,
   };
 };

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styles from './ProductDetailsPage.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useDetailsProduct } from '../../shared/hooks/useDetailsProduct';
 // eslint-disable-next-line max-len
 import { useProductConfigurator } from '../../shared/hooks/useProductConfigurator';
@@ -12,35 +12,54 @@ import { RightTopSection } from './components/RightTopSection';
 import { BottomSection } from './components/BottomSection';
 import { getProductDetailsById } from '../../shared/hooks/products';
 
-export const ProductDetailsPage = () => {
-  const { product, isLoading, hasError, setIsLoading, setProduct, productId } =
-    useDetailsProduct();
+export const ProductDetailsPage: React.FC = () => {
+  const { category = 'phones', productId } = useParams<{
+    category: string;
+    productId: string;
+  }>();
+
   const { recommendedProducts, navigate } = useProductConfigurator();
+
+  const {
+    product,
+    isLoading,
+    hasError,
+    setIsLoading,
+    setHasError,
+    setProduct,
+  } = useDetailsProduct();
 
   useEffect(() => {
     if (!productId) {
       return;
     }
 
-    const loadProduct = async () => {
-      try {
-        setIsLoading(true);
-        const data = await getProductDetailsById(productId);
+    let isMounted = true;
 
-        setProduct(data);
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error(error);
-        setProduct(null);
-      } finally {
-        setIsLoading(false);
-      }
+    setIsLoading(true);
+    setHasError(false);
+
+    getProductDetailsById(category, productId)
+      .then(data => {
+        if (isMounted) {
+          setProduct(data);
+        }
+      })
+      .catch(() => {
+        if (isMounted) {
+          setHasError(true);
+        }
+      })
+      .finally(() => {
+        if (isMounted) {
+          setIsLoading(false);
+        }
+      });
+
+    return () => {
+      isMounted = false;
     };
-
-    if (productId) {
-      loadProduct();
-    }
-  }, [productId, setIsLoading, setProduct]);
+  }, [category, productId, setHasError, setIsLoading, setProduct]);
 
   if (!isLoading && (!product || hasError)) {
     return <ProductPageSkeleton />;
