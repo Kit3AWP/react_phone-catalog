@@ -1,16 +1,16 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
-import { ProductCard } from '../../../../shared/components/ProductCard';
+import { ProductCard } from '../../../shared/components/ProductCard';
 import styles from './ProductsSlider.module.scss';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css';
-import { Product } from '../../../../shared/types/Product';
+import { Product } from '../../types/Product';
 // eslint-disable-next-line max-len
-import { useHomePageProducts } from '../../../../shared/hooks/useHomePageProducts';
+import { useHomePageProducts } from '../../../shared/hooks/useHomePageProducts';
 // eslint-disable-next-line max-len
-import { SkeletonCardLoader } from '../../../../shared/components/SkeletonCardLoader';
+import { SkeletonCardLoader } from '../../../shared/components/SkeletonCardLoader';
 
 interface ProductsSliderProps {
   title: string;

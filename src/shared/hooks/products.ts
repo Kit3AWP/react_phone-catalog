@@ -25,6 +25,18 @@ export const getProductById = async (productId: string): Promise<Product> => {
   return product;
 };
 
+export const getProductDetailsById = async (
+  productId: string,
+): Promise<ProductDetails> => {
+  const response = await fetch(`./api/products/${productId}.json`);
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch product details');
+  }
+
+  return response.json();
+};
+
 export const getDetailedProduct = async (
   productId: string,
 ): Promise<ProductDetails> => {
@@ -33,7 +45,7 @@ export const getDetailedProduct = async (
   const lightProduct = allProducts.find(item => item.itemId === productId);
 
   if (!lightProduct) {
-    throw new Error('There are no product in catalog');
+    throw new Error(`${import.meta.env.BASE_URL}api/products.json`);
   }
 
   const category = lightProduct.category;
@@ -54,5 +66,8 @@ export const getDetailedProduct = async (
     throw new Error('Product details not found');
   }
 
-  return detailedItem;
+  return {
+    ...detailedItem,
+    numericId: lightProduct.id,
+  };
 };

@@ -34,7 +34,10 @@ export const useDetailsProduct = () => {
 
   return {
     product,
+    setProduct,
     isLoading,
+    setIsLoading,
     hasError,
+    productId,
   };
 };

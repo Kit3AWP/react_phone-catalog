@@ -23,4 +23,5 @@ export interface ProductDetails {
   camera: string;
   zoom: string;
   cell: string[];
+  numericId?: number;
 }

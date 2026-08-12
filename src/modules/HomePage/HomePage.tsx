@@ -2,7 +2,7 @@ import React from 'react';
 import { PromoSlider } from './components/Swiper/PromoSlider';
 import styles from './HomePage.module.scss';
 import { Link } from 'react-router-dom';
-import { ProductsSlider } from './components/ProductsSlider';
+import { ProductsSlider } from '../../shared/components/ProductsSlider';
 import { useHomePageProducts } from '../../shared/hooks/useHomePageProducts';
 
 export const HomePage = () => {

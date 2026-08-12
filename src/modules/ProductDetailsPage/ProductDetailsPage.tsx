@@ -1,31 +1,54 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import styles from './ProductDetailsPage.module.scss';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDetailsProduct } from '../../shared/hooks/useDetailsProduct';
-import classNames from 'classnames';
+// eslint-disable-next-line max-len
+import { useProductConfigurator } from '../../shared/hooks/useProductConfigurator';
+import { ProductsSlider } from '../../shared/components/ProductsSlider';
+// eslint-disable-next-line max-len
+import { ProductPageSkeleton } from '../../shared/components/ProductPageSkeleton';
+import { ProductGallery } from './components/Gallery';
+import { RightTopSection } from './components/RightTopSection';
+import { BottomSection } from './components/BottomSection';
+import { getProductDetailsById } from '../../shared/hooks/products';
 
 export const ProductDetailsPage = () => {
-  const { product, isLoading, hasError } = useDetailsProduct();
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [selectedColor, setSelectedColor] = useState<string | null>(null);
-
-  const navigate = useNavigate();
+  const { product, isLoading, hasError, setIsLoading, setProduct, productId } =
+    useDetailsProduct();
+  const { recommendedProducts, navigate } = useProductConfigurator();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    if (!productId) {
+      return;
+    }
 
-  if (isLoading) {
-    return <p>Loading...</p>;
+    const loadProduct = async () => {
+      try {
+        setIsLoading(true);
+        const data = await getProductDetailsById(productId);
+
+        setProduct(data);
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(error);
+        setProduct(null);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (productId) {
+      loadProduct();
+    }
+  }, [productId, setIsLoading, setProduct]);
+
+  if (!isLoading && (!product || hasError)) {
+    return <ProductPageSkeleton />;
   }
 
-  if (hasError || !product) {
-    return <h1>Product was not found</h1>;
+  if (!product || hasError) {
+    return <div className={styles.notFound}>Product was not found</div>;
   }
-
-  const activeImage = selectedImage || product.images[0];
-  const activeColor = selectedColor || product.colorsAvailable[0];
 
   return (
     <main className={styles.container}>
@@ -51,51 +74,19 @@ export const ProductDetailsPage = () => {
       <h1 className={styles.title}>{product.name}</h1>
 
       <div className={styles.topSection}>
-        <div className={styles.gallery}>
-          <div className={styles.thumbnails}>
-            {product.images.map(image => (
-              <img
-                src={image}
-                key={image}
-                className={classNames(styles.miniatureImage, {
-                  [styles.selected]: image === activeImage,
-                })}
-                onClick={() => setSelectedImage(image)}
-              />
-            ))}
-          </div>
-          <div className={styles.mainImage}>
-            <img src={activeImage} />
-          </div>
-        </div>
+        <ProductGallery images={product.images} />
 
-        <div className={styles.rightSection}>
-          <div className={styles.colors}>
-            {product.colorsAvailable.map(color => (
-              <label
-                className={styles.colorLabel}
-                key={color}
-                htmlFor={`color-${color}`}
-              >
-                <input
-                  type="radio"
-                  name="color"
-                  value={color}
-                  id={`color-${color}`}
-                  className={styles.hiddenRadio}
-                  checked={color === activeColor}
-                  onChange={() => setSelectedColor(color)}
-                />
+        <RightTopSection />
+      </div>
 
-                <span
-                  className={styles.colorCircle}
-                  style={{ backgroundColor: color }}
-                  aria-label={color}
-                ></span>
-              </label>
-            ))}
-          </div>
-        </div>
+      <BottomSection />
+
+      <div className={styles.sliderSection}>
+        <ProductsSlider
+          title="You may also like"
+          sliderId="recommended"
+          products={recommendedProducts}
+        />
       </div>
     </main>
   );
