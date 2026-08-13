@@ -13,19 +13,18 @@ export const getProducts = async (): Promise<Product[]> => {
   return response.json();
 };
 
-export const getProductDetailsById = async (
+export const getProductsByCategory = async (
   category: string,
-  productId: string,
-): Promise<ProductDetails> => {
+): Promise<ProductDetails[]> => {
   const targetCategory = category || 'phones';
 
-  const response = await fetch(`/api/${targetCategory}/${productId}.json`);
+  const response = await fetch(`/api/${targetCategory}.json`);
 
   if (!response.ok) {
-    throw new Error(
-      `Failed to fetch details for category "${targetCategory}" and ID "${productId}"`,
-    );
+    throw new Error(`Failed to fetch category file: ${targetCategory}.json`);
   }
+
+  await new Promise(resolve => setTimeout(resolve, 300));
 
   return response.json();
 };

@@ -6,8 +6,7 @@
   gap: 16px;
   height: auto;
 
-  @include on-small-tablet {
-    display: flex;
+  @include on-phone {
     flex-direction: column-reverse;
     height: auto;
   }

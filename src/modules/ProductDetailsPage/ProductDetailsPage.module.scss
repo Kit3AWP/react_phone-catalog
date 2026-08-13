@@ -108,7 +108,7 @@
   gap: 64px;
   margin-bottom: 80px;
 
-  @include on-small-tablet {
+  @include on-phone {
     grid-template-columns: 1fr;
   }
 }

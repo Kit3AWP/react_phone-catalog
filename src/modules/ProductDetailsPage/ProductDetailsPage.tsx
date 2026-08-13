@@ -10,7 +10,7 @@ import { ProductPageSkeleton } from '../../shared/components/ProductPageSkeleton
 import { ProductGallery } from './components/Gallery';
 import { RightTopSection } from './components/RightTopSection';
 import { BottomSection } from './components/BottomSection';
-import { getProductDetailsById } from '../../shared/hooks/products';
+import { getProductsByCategory } from '../../shared/hooks/products';
 
 export const ProductDetailsPage: React.FC = () => {
   const { category = 'phones', productId } = useParams<{
@@ -39,10 +39,20 @@ export const ProductDetailsPage: React.FC = () => {
     setIsLoading(true);
     setHasError(false);
 
-    getProductDetailsById(category, productId)
-      .then(data => {
-        if (isMounted) {
-          setProduct(data);
+    getProductsByCategory(category)
+      .then(products => {
+        if (!isMounted) {
+          return;
+        }
+
+        const foundProduct = products.find(
+          item => item.id === productId || String(item.id) === productId,
+        );
+
+        if (foundProduct) {
+          setProduct(foundProduct);
+        } else {
+          setProduct(null);
         }
       })
       .catch(() => {
@@ -61,12 +71,16 @@ export const ProductDetailsPage: React.FC = () => {
     };
   }, [category, productId, setHasError, setIsLoading, setProduct]);
 
-  if (!isLoading && (!product || hasError)) {
+  if (isLoading) {
     return <ProductPageSkeleton />;
   }
 
-  if (!product || hasError) {
-    return <div className={styles.notFound}>Product was not found</div>;
+  if (hasError || !product) {
+    return (
+      <div>
+        <h1>Product was not found</h1>
+      </div>
+    );
   }
 
   return (
