@@ -17,7 +17,12 @@
 
   h2.aboutTitle {
     margin-bottom: 16px;
+    font-size: 22px;
     margin-top: 0;
+
+    @include on-phone {
+      font-size: 20px;
+    }
   }
 }
 

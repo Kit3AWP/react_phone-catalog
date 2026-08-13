@@ -1,25 +1,34 @@
 @use 'src/styles/mixins' as *;
 
+$thumb-size: 80px;
+$thumb-gap: 16px;
+$thumbs-per-view: 4;
+
 .gallery {
   display: grid;
-  grid-template-columns: 80px minmax(0, 1fr);
+  grid-template-columns: $thumb-size minmax(0, 1fr);
+  align-items: start;
   gap: 16px;
   height: auto;
-
-  @include on-phone {
-    flex-direction: column-reverse;
-    height: auto;
+  // below 800px Swiper switches thumbs to horizontal,
+  // so the grid becomes a single column: main image on top, thumbs under it
+  @include on-small-tablet {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto;
   }
 }
-
 .thumbnails {
-  width: 100%;
-  height: 100%;
+  width: $thumb-size;
+  // 4 thumbs + gaps between them, so the column never stretches
+  height: $thumb-size * $thumbs-per-view + $thumb-gap * ($thumbs-per-view - 1);
   min-width: 0;
   min-height: 0;
 
   @include on-small-tablet {
-    height: 80px;
+    grid-row: 2;
+    width: 100%;
+    max-width: 100%;
+    height: 50px;
   }
 }
 
@@ -29,11 +38,10 @@
 }
 
 .thumbSlide {
-  width: 80px;
-  height: 80px;
+  width: $thumb-size;
+  height: $thumb-size;
   flex-shrink: 0;
 }
-
 
 .thumbImage {
   width: 100%;
@@ -52,15 +60,15 @@
     border-color: var(--text-main);
   }
 }
-
 .mainImage {
   width: 100%;
   height: 100%;
   min-width: 0;
   min-height: 0;
   overflow: hidden;
-
+  
   @include on-small-tablet {
+    grid-row: 1;
     aspect-ratio: 1 / 1;
   }
 
@@ -83,7 +91,6 @@
     object-fit: contain;
   }
 }
-
 .mainSwiper {
   width: 100%;
   height: 100%;

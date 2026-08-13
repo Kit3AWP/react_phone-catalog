@@ -21,7 +21,7 @@ export const ProductGallery: React.FC<Props> = ({ images }) => {
           onSwiper={setThumbsSwiper}
           watchSlidesProgress
           breakpoints={{
-            768: {
+            800: {
               direction: 'vertical',
               slidesPerView: 4,
               spaceBetween: 16,
