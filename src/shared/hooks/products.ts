@@ -1,5 +1,5 @@
 import { Product } from '../types/Product';
-import { ProductDetails } from '../types/ProductsDetails';
+import { ProductDetails } from '../types/ProductDetails';
 
 export const getProducts = async (): Promise<Product[]> => {
   const response = await fetch(`${import.meta.env.BASE_URL}api/products.json`);
@@ -8,7 +8,7 @@ export const getProducts = async (): Promise<Product[]> => {
     throw new Error('Failed to fetch products');
   }
 
-  await new Promise(resolve => setTimeout(resolve, 2000));
+  await new Promise(resolve => setTimeout(resolve, 300));
 
   return response.json();
 };
@@ -24,7 +24,7 @@ export const getProductsByCategory = async (
     throw new Error(`Failed to fetch category file: ${targetCategory}.json`);
   }
 
-  await new Promise(resolve => setTimeout(resolve, 2000));
+  await new Promise(resolve => setTimeout(resolve, 300));
 
   return response.json();
 };

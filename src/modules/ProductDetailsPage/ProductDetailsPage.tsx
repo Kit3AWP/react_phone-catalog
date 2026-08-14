@@ -11,6 +11,7 @@ import { ProductGallery } from './components/Gallery';
 import { RightTopSection } from './components/RightTopSection';
 import { BottomSection } from './components/BottomSection';
 import { getProductsByCategory } from '../../shared/hooks/products';
+import { ProductNotFound } from '../ProductNotFoundPage';
 
 export const ProductDetailsPage: React.FC = () => {
   const { category = 'phones', productId } = useParams<{
@@ -76,11 +77,7 @@ export const ProductDetailsPage: React.FC = () => {
   }
 
   if (hasError || !product) {
-    return (
-      <div>
-        <h1>Product was not found</h1>
-      </div>
-    );
+    return <ProductNotFound />;
   }
 
   return (
@@ -109,10 +106,10 @@ export const ProductDetailsPage: React.FC = () => {
       <div className={styles.topSection}>
         <ProductGallery images={product.images} />
 
-        <RightTopSection />
+        <RightTopSection product={product} />
       </div>
 
-      <BottomSection />
+      <BottomSection product={product} />
 
       <div className={styles.sliderSection}>
         <ProductsSlider

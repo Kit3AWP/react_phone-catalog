@@ -1,20 +1,12 @@
 import React from 'react';
 import styles from './BottomSection.module.scss';
-import { useDetailsProduct } from '../../../../shared/hooks/useDetailsProduct';
-// eslint-disable-next-line max-len
-import { ProductPageSkeleton } from '../../../../shared/components/ProductPageSkeleton';
+import { ProductDetails } from '../../../../shared/types/ProductDetails';
 
-export const BottomSection = () => {
-  const { product, hasError, isLoading } = useDetailsProduct();
+interface Props {
+  product: ProductDetails;
+}
 
-  if (isLoading || !product) {
-    return <ProductPageSkeleton />;
-  }
-
-  if (hasError || !product) {
-    return <h1>Product was not found</h1>;
-  }
-
+export const BottomSection = ({ product }: Props) => {
   return (
     <div className={styles.bottomSection}>
       <div className={styles.aboutColumn}>

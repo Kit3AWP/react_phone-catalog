@@ -2,14 +2,17 @@ import React from 'react';
 import styles from './RightTopSection.module.scss';
 // eslint-disable-next-line max-len
 import { useProductConfigurator } from '../../../../shared/hooks/useProductConfigurator';
-import { useDetailsProduct } from '../../../../shared/hooks/useDetailsProduct';
 import { useFavorites } from '../../../../shared/hooks/useFavorites';
 import { Product } from '../../../../shared/types/Product';
 import classNames from 'classnames';
+import { ProductDetails } from '../../../../shared/types/ProductDetails';
+import { useCart } from '../../../CartPage/CartContext';
 
-export const RightTopSection = () => {
-  const { product, hasError } = useDetailsProduct();
+interface Props {
+  product: ProductDetails;
+}
 
+export const RightTopSection = ({ product }: Props) => {
   const {
     colorsMap,
     handleColorChange,
@@ -19,14 +22,17 @@ export const RightTopSection = () => {
   } = useProductConfigurator();
 
   const { favorites, toggleFavorite } = useFavorites();
-  const isFavorite = favorites.some(item => item.id === product?.numericId);
+  const { cart, addToCart, removeFromCart } = useCart();
 
-  const onClickFav = () => {
-    if (!product || !product.numericId) {
-      return;
+  const isFavorite = favorites.some(item => item.id === product.numericId);
+  const isInCart = cart.some(item => item.product.id === product.numericId);
+
+  const toCartProduct = (): Product | null => {
+    if (product.numericId === undefined) {
+      return null;
     }
 
-    const productToSave: Product = {
+    return {
       id: product.numericId,
       itemId: product.id,
       name: product.name,
@@ -40,13 +46,38 @@ export const RightTopSection = () => {
       image: product.images[0],
       category: product.category,
     };
+  };
+
+  const handleCartClick = (event: React.MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (product.numericId === undefined) {
+      return;
+    }
+
+    if (isInCart) {
+      removeFromCart(product.numericId);
+
+      return;
+    }
+
+    const cartProduct = toCartProduct();
+
+    if (cartProduct) {
+      addToCart(cartProduct);
+    }
+  };
+
+  const onClickFav = () => {
+    const productToSave = toCartProduct();
+
+    if (!productToSave) {
+      return;
+    }
 
     toggleFavorite(productToSave);
   };
-
-  if (hasError || !product) {
-    return <h1>Product was not found</h1>;
-  }
 
   return (
     <div className={styles.rightSection}>
@@ -130,8 +161,21 @@ export const RightTopSection = () => {
       </div>
 
       <div className={styles.buttons}>
-        <button type="button" className={styles.addToCartBtn}>
-          Add to cart
+        <button
+          type="button"
+          className={classNames(styles.addToCartBtn, {
+            [styles.added]: isInCart,
+          })}
+          onClick={handleCartClick}
+        >
+          {isInCart ? (
+            <>
+              <span className={styles.textAdded}>Added to cart</span>
+              <span className={styles.textRemove}>Remove from cart</span>
+            </>
+          ) : (
+            'Add to cart'
+          )}
         </button>
         <button
           type="button"
