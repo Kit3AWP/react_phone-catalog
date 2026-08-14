@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { Product } from '../../../shared/types/Product';
+import toast from 'react-hot-toast';
 
 export interface FavoritesContextType {
   favorites: Product[];
@@ -30,8 +31,12 @@ export const FavoritesProvider = ({
       const isExist = prevFavorites.some(item => item.id === product.id);
 
       if (isExist) {
+        toast('Removed from favorites', { icon: '💔' });
+
         return prevFavorites.filter(item => item.id !== product.id);
       } else {
+        toast('Added to favorites', { icon: '❤️' });
+
         return [...prevFavorites, product];
       }
     });

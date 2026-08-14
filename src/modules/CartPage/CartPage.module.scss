@@ -1,0 +1,257 @@
+@use './src/styles/mixins' as *;
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 32px 80px;
+
+  @include on-tablet {
+    padding: 24px 24px 64px;
+  }
+
+  @include on-phone {
+    padding: 16px 16px 64px;
+  }
+}
+
+.leftArrow {
+  @include icon-mask('/icons/leftArrow.svg', 16px);
+
+  transition: background-color 0.3s ease;
+}
+
+.minusIcon {
+  @include icon-mask('/icons/Minus.svg', 16px);
+}
+
+.plusIcon {
+  @include icon-mask('/icons/Plus.svg', 16px);
+}
+
+.closeIcon {
+  @include icon-mask('/icons/Close.svg', 16px);
+
+  transition: all 0.3s ease;
+  background-color: var(--color-icons);
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  margin-bottom: 16px;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+
+  :global(.dark-theme) & {
+    color: var(--text-main);
+  }
+
+  &:hover {
+    color: var(--color-accent);
+
+    .leftArrow {
+      background-color: var(--color-accent);
+    }
+  }
+}
+
+.backText {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 100%;
+}
+
+.title {
+  margin: 0;
+  margin-bottom: 40px;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 56px;
+  letter-spacing: -1%;
+
+  @include on-phone {
+    font-size: 32px;
+    line-height: 41px;
+  }
+}
+
+.cartContent {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: flex-start;
+
+  @include on-tablet {
+    flex-direction: column;
+    gap: 32px;
+  }
+}
+
+.itemsList {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.checkoutBlock {
+  width: 360px;
+  flex-shrink: 0;
+  padding: 24px;
+  background-color: var(--color-surface);
+  border: 2px solid var(--color-elements);
+  border-radius: 8px;
+  text-align: center;
+
+  @include on-tablet {
+    width: 100%;
+  }
+}
+
+.totalPrice {
+  font-size: 32px;
+  font-weight: 800;
+  margin: 0 0 8px;
+  color: var(--text-main);
+}
+
+.totalCount {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0 0 24px;
+}
+
+.checkoutDivider {
+  border: none;
+  height: 1.5px;
+  background-color: var(--color-elements);
+  margin-bottom: 24px;
+}
+
+.checkoutBtn {
+  width: 100%;
+  height: 48px;
+  background-color: var(--color-accent);
+  color: #fff;
+  font-weight: 700;
+  border-radius: 8px;
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.cartItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 24px;
+  background-color: var(--bg-surface);
+  border: 2px solid var(--color-elements);
+  border-radius: 8px;
+
+  @include on-phone {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.deleteBtn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    .closeIcon {
+      background-color: var(--text-main);
+    }
+  }
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-grow: 1;
+}
+
+.productImage {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.itemName {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.quantityCounter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  span {
+    min-width: 16px;
+    text-align: center;
+    font-weight: 600;
+  }
+}
+
+.button {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border-radius: 6px;
+  border: 2px solid var(--color-icons);
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: var(--text-main);
+    background-color: var(--bg-hover);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  :global(.dark-theme) & {
+    border-color: transparent;
+    background-color: var(--color-icons);
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-color: var(--text-main);
+      background-color: var(--bg-hover);
+    }
+  }
+}
+
+.price {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-main);
+}

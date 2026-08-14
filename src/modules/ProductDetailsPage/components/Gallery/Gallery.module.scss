@@ -3,13 +3,15 @@
 $thumb-size: 80px;
 $thumb-gap: 16px;
 $thumbs-per-view: 4;
+$thumb-size-mobile: 50px;
 
 .gallery {
   display: grid;
   grid-template-columns: $thumb-size minmax(0, 1fr);
   align-items: start;
   gap: 16px;
-  height: auto;
+  height: $thumb-size * $thumbs-per-view + $thumb-gap * ($thumbs-per-view - 1);
+
   // below 800px Swiper switches thumbs to horizontal,
   // so the grid becomes a single column: main image on top, thumbs under it
   @include on-small-tablet {
@@ -17,8 +19,10 @@ $thumbs-per-view: 4;
     grid-template-rows: auto auto;
   }
 }
+
 .thumbnails {
   width: $thumb-size;
+
   // 4 thumbs + gaps between them, so the column never stretches
   height: $thumb-size * $thumbs-per-view + $thumb-gap * ($thumbs-per-view - 1);
   min-width: 0;
@@ -28,7 +32,7 @@ $thumbs-per-view: 4;
     grid-row: 2;
     width: 100%;
     max-width: 100%;
-    height: 50px;
+    height: $thumb-size-mobile;
   }
 }
 
@@ -41,6 +45,11 @@ $thumbs-per-view: 4;
   width: $thumb-size;
   height: $thumb-size;
   flex-shrink: 0;
+
+  @include on-small-tablet {
+    width: $thumb-size-mobile;
+    height: $thumb-size-mobile;
+  }
 }
 
 .thumbImage {
@@ -60,13 +69,15 @@ $thumbs-per-view: 4;
     border-color: var(--text-main);
   }
 }
+
 .mainImage {
   width: 100%;
   height: 100%;
   min-width: 0;
   min-height: 0;
   overflow: hidden;
-  
+  cursor: pointer;
+
   @include on-small-tablet {
     grid-row: 1;
     aspect-ratio: 1 / 1;
@@ -91,6 +102,7 @@ $thumbs-per-view: 4;
     object-fit: contain;
   }
 }
+
 .mainSwiper {
   width: 100%;
   height: 100%;

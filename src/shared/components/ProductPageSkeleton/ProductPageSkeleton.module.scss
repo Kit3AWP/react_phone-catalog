@@ -1,3 +1,10 @@
+@use 'src/styles/mixins' as *;
+
+$thumb-size: 80px;
+$thumb-gap: 16px;
+$thumbs-per-view: 4;
+$thumb-size-mobile: 50px;
+
 .skeletonBone {
   border-radius: 16px;
   background-color: var(--color-icons);
@@ -23,7 +30,15 @@
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 24px 16px;
+  padding: 24px 32px;
+
+  @include on-tablet {
+    padding: 24px 24px;
+  }
+
+  @include on-phone {
+    padding: 16px 16px;
+  }
 }
 
 .breadcrumbs {
@@ -45,28 +60,63 @@
   grid-template-columns: 1fr 1fr;
   gap: 64px;
   margin-bottom: 80px;
+
+  @include on-phone {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 56px;
+  }
 }
 
 .gallery {
-  display: flex;
+  display: grid;
+  grid-template-columns: $thumb-size minmax(0, 1fr);
+  align-items: start;
   gap: 16px;
+  height: $thumb-size * $thumbs-per-view + $thumb-gap * ($thumbs-per-view - 1); // 368px, як у реальному компоненті
 
-  .thumbnails {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-
-    .thumb {
-      width: 80px;
-      height: 80px;
-      border-radius: 8px;
-    }
+  @include on-small-tablet {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    height: auto;
   }
 
+  .thumbnails {
+  display: grid;
+  gap: 16px;
+  width: $thumb-size;
+  height: $thumb-size * $thumbs-per-view + $thumb-gap * ($thumbs-per-view - 1);
+
+  @include on-small-tablet {
+    grid-row: 2;
+    grid-auto-flow: column;
+    gap: 8px;
+    width: 100%;
+    max-width: 100%;
+    height: $thumb-size-mobile;
+  }
+
+  .thumb {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+
+    @include on-small-tablet {
+      width: $thumb-size-mobile;
+      height: $thumb-size-mobile;
+    }
+  }
+}
+
   .bigImage {
-    flex-grow: 1;
-    height: 460px;
+    width: 100%;
+    height: 100%;
     border-radius: 16px;
+
+    @include on-small-tablet {
+      grid-row: 1;
+      aspect-ratio: 1 / 1;
+    }
   }
 }
 
@@ -113,47 +163,61 @@
   }
 
   .buttons {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 32px;
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+  max-width: 360px;
 
-    .cartBtn {
-      flex-grow: 1;
-      height: 48px;
-      border-radius: 8px;
-    }
+  @include on-phone {
+    max-width: 100%;
+  }
+}
 
-    .heartBtn {
-      width: 48px;
-      height: 48px;
-      border-radius: 8px;
-    }
+  .cartBtn {
+    flex-grow: 1;
+    height: 48px;
+    border-radius: 8px;
+  }
+
+  .heartBtn {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
   }
 
   .summarySpecs {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    max-width: 360px;
 
-    .specLine {
-      width: 100%;
-      height: 14px;
-      border-radius: 4px;
+    @include on-phone {
+      max-width: 100%;
     }
   }
-}
 
-.mainDivider {
-  width: 100%;
-  height: 1px;
-  background-color: var(--color-elements, #3b3e45);
-  margin-bottom: 64px;
-}
+  .specLine {
+    width: 100%;
+    height: 14px;
+    border-radius: 4px;
+  }
 
-.bottomGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
+  .mainDivider {
+    width: 100%;
+    height: 1px;
+    background-color: var(--color-elements, #3b3e45);
+    margin-bottom: 64px;
+  }
+
+  .bottomGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+
+    @include on-small-tablet {
+      grid-template-columns: 1fr;
+    }
+  }
 
   .sectionTitle {
     width: 160px;
@@ -164,36 +228,37 @@
 
   .aboutBlock {
     margin-bottom: 32px;
+  }
 
-    .subTitle {
-      width: 40%;
-      height: 20px;
-      margin-bottom: 12px;
-      border-radius: 4px;
-    }
+  .subTitle {
+    width: 40%;
+    height: 20px;
+    margin-bottom: 12px;
+    border-radius: 4px;
+  }
 
-    .textLine {
-      width: 100%;
-      height: 14px;
-      margin-bottom: 8px;
-      border-radius: 4px;
-    }
+  .textLine {
+    width: 100%;
+    height: 14px;
+    margin-bottom: 8px;
+    border-radius: 4px;
   }
 
   .specsList {
     display: flex;
     flex-direction: column;
     gap: 16px;
+  }
 
-    .specRow {
-      display: flex;
-      justify-content: space-between;
+  .specRow {
+    display: flex;
+    justify-content: space-between;
+  }
 
-      .specLabel, .specValue {
-        width: 100px;
-        height: 14px;
-        border-radius: 4px;
-      }
-    }
+  .specLabel,
+  .specValue {
+    width: 100px;
+    height: 14px;
+    border-radius: 4px;
   }
 }

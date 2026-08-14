@@ -49,10 +49,6 @@
   font-weight: 600;
   color: var(--text-main);
   margin: 0;
-
-  &:first-child {
-    margin-top: 8px;
-  }
 }
 
 .paragraph {
@@ -73,6 +69,10 @@
     font-size: 22px;
     font-weight: 700;
     color: var(--text-main);
+
+    @include on-phone {
+      font-size: 16px;
+    }
   }
 }
 
@@ -106,5 +106,5 @@
   border: none;
   height: 1.5px;
   background-color: var(--color-elements);
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 }

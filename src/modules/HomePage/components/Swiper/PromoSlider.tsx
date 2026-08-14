@@ -7,6 +7,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 
 export const PromoSlider = () => {
   return (
@@ -36,28 +37,53 @@ export const PromoSlider = () => {
             clickable: true,
           }}
         >
-          <SwiperSlide>
-            <img
-              className={styles.bannerImg}
-              src="./img/banner-tablet-1.png"
-              alt="iPhone 14"
-            />
+          <SwiperSlide className={styles.slide}>
+            <picture>
+              <source
+                media="(max-width: 639px)"
+                srcSet="./img/banner-mobile-1.png"
+              />
+              <img
+                className={styles.bannerImg}
+                src="./img/banner-tablet-1.png"
+                alt="iPhone 14"
+              />
+            </picture>
+
+            <Link
+              to="/product/apple-iphone-14-pro-512gb-spaceblack"
+              className={styles.slideBtn}
+            >
+              Order now
+            </Link>
           </SwiperSlide>
 
-          <SwiperSlide>
-            <img
-              className={styles.bannerImg}
-              src="./img/banner-tablet-2.png"
-              alt="Tablets"
-            />
+          <SwiperSlide className={styles.slide}>
+            <picture>
+              <source
+                media="(max-width: 639px)"
+                srcSet="./img/banner-mobile-2.png"
+              />
+              <img
+                className={styles.bannerImg}
+                src="./img/banner-tablet-2.png"
+                alt="Tablets"
+              />
+            </picture>
           </SwiperSlide>
 
-          <SwiperSlide>
-            <img
-              className={styles.bannerImg}
-              src="./img/banner-tablet-3.png"
-              alt="Accessories"
-            />
+          <SwiperSlide className={styles.slide}>
+            <picture>
+              <source
+                media="(max-width: 639px)"
+                srcSet="./img/banner-mobile-3.png"
+              />
+              <img
+                className={styles.bannerImg}
+                src="./img/banner-tablet-3.png"
+                alt="Accessories"
+              />
+            </picture>
           </SwiperSlide>
         </Swiper>
         <button

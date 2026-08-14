@@ -28,6 +28,27 @@
       box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15);
     }
   }
+
+  &.imposterCard:hover {
+    border-color: #eb5757;
+    box-shadow: 0 0 20px rgba(235, 87, 87, 0.6);
+
+    &::before {
+      content: 'SUS ඞ';
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #eb5757;
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      z-index: 2;
+      pointer-events: none;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+  }
 }
 
 .imageWrapper {
@@ -132,9 +153,45 @@
     transform: scale(0.96);
   }
 
+  &.added {
+    color: #27AE60;
+    border: 2px solid var(--color-accent);
+    background-color: var(--bg-surface);
+
+    .textAdded {
+      display: inline;
+    }
+
+    .textRemove {
+      display: none;
+    }
+
+    &:hover {
+      color: #EB5757;
+
+      .textAdded {
+        display: none;
+      }
+
+      .textRemove {
+        display: inline;
+      }
+    }
+  }
+
   :global(.dark-theme) & {
     &:hover {
       box-shadow: 0 4px 16px rgba(255, 255, 255, 0.1);
+    }
+
+    &.added {
+      background-color: var(--color-icons);
+      border: transparent;
+      color: #fff;
+
+      &:hover {
+        color: #EB5757;
+      }
     }
   }
 }

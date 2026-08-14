@@ -4,6 +4,8 @@ import { Product } from '../../types/Product';
 import { useFavorites } from '../../hooks/useFavorites';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
+import { useCart } from '../../../modules/CartPage/CartContext';
+import toast from 'react-hot-toast';
 
 interface ProductCardProps {
   product: Product;
@@ -14,19 +16,60 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   product,
   hideFullPrice,
 }) => {
-  const { image, name, price, fullPrice, screen, capacity, ram } = product;
+  const { image, name, price, fullPrice, screen, capacity, ram, isImposter } =
+    product;
   const { favorites, toggleFavorite } = useFavorites();
+  const { cart, addToCart, removeFromCart } = useCart();
 
   const isFavorite = favorites.some(item => item.id === product.id);
+  const isInCart = cart.some(item => item.product.id === product.id);
 
   const handleClick = (event: MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
     event.stopPropagation();
   };
 
+  const handleCartClick = (event: React.MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (isInCart) {
+      removeFromCart(product.id);
+    } else {
+      addToCart(product);
+    }
+  };
+
+  const handleCardClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (isImposter) {
+      event.preventDefault();
+
+      const sound = new Audio(
+        `${import.meta.env.BASE_URL}img/phones/among-us.mp3`,
+      );
+
+      sound.volume = 0.5;
+
+      sound.play().catch(() => {});
+
+      toast('Emergency Meeting! Imposter detected', {
+        icon: 'ඞ',
+        className: 'custom-toast imposter-toast',
+      });
+    }
+  };
+
   return (
-    <Link to={`/product/${product.itemId}`}>
-      <article className={styles.card}>
+    <Link
+      to={`/product/${product.itemId}`}
+      onClick={handleCardClick}
+      className={classNames({ [styles.imposterLink]: isImposter })}
+    >
+      <article
+        className={classNames(styles.card, {
+          [styles.imposterCard]: isImposter,
+        })}
+      >
         <div className={styles.imageWrapper}>
           <img
             src={`${import.meta.env.BASE_URL}${image}`}
@@ -63,8 +106,21 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         </div>
 
         <div className={styles.buttons} onClick={handleClick}>
-          <button type="button" className={styles.addToCartBtn}>
-            Add to cart
+          <button
+            type="button"
+            className={classNames(styles.addToCartBtn, {
+              [styles.added]: isInCart,
+            })}
+            onClick={handleCartClick}
+          >
+            {isInCart ? (
+              <>
+                <span className={styles.textAdded}>Added to cart</span>
+                <span className={styles.textRemove}>Remove from cart</span>
+              </>
+            ) : (
+              'Add to cart'
+            )}
           </button>
           <button
             type="button"

@@ -111,5 +111,6 @@
   @include on-phone {
     grid-template-columns: 1fr;
     gap: 16px;
+    margin-bottom: 56px;
   }
 }

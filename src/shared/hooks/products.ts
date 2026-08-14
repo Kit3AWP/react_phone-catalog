@@ -8,7 +8,7 @@ export const getProducts = async (): Promise<Product[]> => {
     throw new Error('Failed to fetch products');
   }
 
-  await new Promise(resolve => setTimeout(resolve, 300));
+  await new Promise(resolve => setTimeout(resolve, 2000));
 
   return response.json();
 };
@@ -18,13 +18,13 @@ export const getProductsByCategory = async (
 ): Promise<ProductDetails[]> => {
   const targetCategory = category || 'phones';
 
-  const response = await fetch(`/api/${targetCategory}.json`);
+  const response = await fetch(`./api/${targetCategory}.json`);
 
   if (!response.ok) {
     throw new Error(`Failed to fetch category file: ${targetCategory}.json`);
   }
 
-  await new Promise(resolve => setTimeout(resolve, 300));
+  await new Promise(resolve => setTimeout(resolve, 2000));
 
   return response.json();
 };

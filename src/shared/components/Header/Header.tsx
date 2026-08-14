@@ -1,16 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { Link, NavLink } from 'react-router-dom';
 import styles from './Header.module.scss';
 import { useTheme } from '../../hooks/useTheme';
 import { useFavorites } from '../../hooks/useFavorites';
+import { useCart } from '../../../modules/CartPage/CartContext';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const { favorites } = useFavorites();
+  const { totalCount } = useCart();
 
   const closeMenu = () => setIsMenuOpen(false);
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
 
   const getNavClass = ({ isActive }: { isActive: boolean }) =>
     classNames(styles.navLink, {
@@ -109,7 +123,14 @@ export const Header = () => {
           }
           aria-label="Shopping cart"
         >
-          <span className={styles.cartIcon} aria-label="Cart" />
+          <div className={styles.iconWrapper}>
+            <span className={styles.cartIcon} aria-label="Cart" />
+            {totalCount > 0 && (
+              <span className={styles.badge} aria-label="Cart badge">
+                {totalCount}
+              </span>
+            )}
+          </div>
         </NavLink>
 
         <aside
@@ -180,7 +201,14 @@ export const Header = () => {
                 })
               }
             >
-              <span className={styles.cartIcon} aria-label="Cart" />
+              <div className={styles.iconWrapper}>
+                <span className={styles.cartIcon} aria-label="Cart" />
+                {totalCount > 0 && (
+                  <span className={styles.badge} aria-label="Cart badge">
+                    {totalCount}
+                  </span>
+                )}
+              </div>
             </NavLink>
           </div>
         </aside>
