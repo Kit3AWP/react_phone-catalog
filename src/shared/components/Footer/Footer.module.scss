@@ -1,6 +1,7 @@
 @use '../../../styles/mixins' as *;
 
 .footer {
+  flex-shrink: 0;
   padding: 32px 24px;
   border-top: 2px solid var(--color-elements);
   background-color: var(--bg-surface);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import { Link, NavLink } from 'react-router-dom';
 import styles from './Header.module.scss';
@@ -13,18 +13,6 @@ export const Header = () => {
   const { totalCount } = useCart();
 
   const closeMenu = () => setIsMenuOpen(false);
-
-  useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isMenuOpen]);
 
   const getNavClass = ({ isActive }: { isActive: boolean }) =>
     classNames(styles.navLink, {

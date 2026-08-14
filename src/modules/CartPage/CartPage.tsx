@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './CartPage.module.scss';
 import { useCart } from './CartContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const CartPage = () => {
   const navigate = useNavigate();
@@ -48,12 +48,17 @@ export const CartPage = () => {
                 >
                   <span className={styles.closeIcon} aria-label="Close" />
                 </button>
-                <img
-                  src={`${import.meta.env.BASE_URL}${product.image}`}
-                  alt={product.name}
-                  className={styles.productImage}
-                />
-                <p className={styles.itemName}>{product.name}</p>
+                <Link
+                  to={`/product/${product.itemId || product.id}`}
+                  className={styles.productLink}
+                >
+                  <img
+                    src={`${import.meta.env.BASE_URL}${product.image}`}
+                    alt={product.name}
+                    className={styles.productImage}
+                  />
+                  <p className={styles.itemName}>{product.name}</p>
+                </Link>
               </div>
 
               <div className={styles.controls}>
