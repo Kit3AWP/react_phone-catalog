@@ -30,16 +30,17 @@
 
 .breadcrumbs {
   display: flex;
-  margin-bottom: 40px;
   gap: 8px;
   align-items: center;
+  margin-bottom: 40px;
 }
 
 .categoryLink {
   font-size: 12px;
   font-weight: 500;
-  color: var(--text-main);
   line-height: 100%;
+  color: var(--text-main);
+
   transition: all 0.3s ease;
 
   &:hover {
@@ -62,11 +63,15 @@
 
 .backButton {
   display: inline-flex;
-  align-items: center;
   gap: 4px;
-  background: transparent;
+  align-items: center;
+
   margin-bottom: 16px;
+
   color: var(--text-secondary);
+
+  background: transparent;
+
   transition: color 0.3s ease;
 
   :global(.dark-theme) & {
@@ -91,8 +96,9 @@
 .title {
   margin: 0;
   margin-bottom: 40px;
-  font-weight: 700;
+
   font-size: 32px;
+  font-weight: 700;
   line-height: 41px;
   letter-spacing: -1%;
 

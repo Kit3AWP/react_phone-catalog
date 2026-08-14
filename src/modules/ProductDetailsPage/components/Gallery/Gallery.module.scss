@@ -8,8 +8,9 @@ $thumb-size-mobile: 50px;
 .gallery {
   display: grid;
   grid-template-columns: $thumb-size minmax(0, 1fr);
-  align-items: start;
   gap: 16px;
+  align-items: start;
+
   height: $thumb-size * $thumbs-per-view + $thumb-gap * ($thumbs-per-view - 1);
 
   // below 800px Swiper switches thumbs to horizontal,
@@ -22,10 +23,10 @@ $thumb-size-mobile: 50px;
 
 .thumbnails {
   width: $thumb-size;
+  min-width: 0;
 
   // 4 thumbs + gaps between them, so the column never stretches
   height: $thumb-size * $thumbs-per-view + $thumb-gap * ($thumbs-per-view - 1);
-  min-width: 0;
   min-height: 0;
 
   @include on-small-tablet {
@@ -37,14 +38,14 @@ $thumb-size-mobile: 50px;
 }
 
 .thumbsSwiper {
-  height: 100%;
   width: 100%;
+  height: 100%;
 }
 
 .thumbSlide {
+  flex-shrink: 0;
   width: $thumb-size;
   height: $thumb-size;
-  flex-shrink: 0;
 
   @include on-small-tablet {
     width: $thumb-size-mobile;
@@ -53,12 +54,15 @@ $thumb-size-mobile: 50px;
 }
 
 .thumbImage {
+  cursor: pointer;
+
   width: 100%;
   height: 100%;
-  object-fit: contain;
   border: 2px solid var(--color-elements);
   border-radius: 8px;
-  cursor: pointer;
+
+  object-fit: contain;
+
   transition: all 0.3s ease;
 
   &:hover {
@@ -71,12 +75,14 @@ $thumb-size-mobile: 50px;
 }
 
 .mainImage {
-  width: 100%;
-  height: 100%;
-  min-width: 0;
-  min-height: 0;
-  overflow: hidden;
   cursor: pointer;
+
+  overflow: hidden;
+
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  min-height: 0;
 
   @include on-small-tablet {
     grid-row: 1;
@@ -96,9 +102,10 @@ $thumb-size-mobile: 50px;
 
   img {
     width: 100%;
-    height: 100%;
     max-width: 100%;
+    height: 100%;
     max-height: 100%;
+
     object-fit: contain;
   }
 }

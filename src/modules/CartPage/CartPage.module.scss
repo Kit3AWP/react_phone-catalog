@@ -31,17 +31,21 @@
 .closeIcon {
   @include icon-mask('/icons/Close.svg', 16px);
 
-  transition: all 0.3s ease;
   background-color: var(--color-icons);
+  transition: all 0.3s ease;
 }
 
 .backButton {
   display: inline-flex;
-  align-items: center;
   gap: 4px;
-  background: transparent;
+  align-items: center;
+
   margin-bottom: 16px;
+
   color: var(--text-secondary);
+
+  background: transparent;
+
   transition: color 0.3s ease;
 
   :global(.dark-theme) & {
@@ -66,8 +70,9 @@
 .title {
   margin: 0;
   margin-bottom: 40px;
-  font-weight: 700;
+
   font-size: 48px;
+  font-weight: 700;
   line-height: 56px;
   letter-spacing: -1%;
 
@@ -90,20 +95,23 @@
 }
 
 .itemsList {
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   gap: 16px;
 }
 
 .checkoutBlock {
-  width: 360px;
   flex-shrink: 0;
+
+  width: 360px;
   padding: 24px;
-  background-color: var(--color-surface);
   border: 2px solid var(--color-elements);
   border-radius: 8px;
+
   text-align: center;
+
+  background-color: var(--color-surface);
 
   @include on-tablet {
     width: 100%;
@@ -111,32 +119,35 @@
 }
 
 .totalPrice {
+  margin: 0 0 8px;
   font-size: 32px;
   font-weight: 800;
-  margin: 0 0 8px;
   color: var(--text-main);
 }
 
 .totalCount {
+  margin: 0 0 24px;
   font-size: 14px;
   color: var(--text-secondary);
-  margin: 0 0 24px;
 }
 
 .checkoutDivider {
-  border: none;
   height: 1.5px;
-  background-color: var(--color-elements);
   margin-bottom: 24px;
+  border: none;
+  background-color: var(--color-elements);
 }
 
 .checkoutBtn {
   width: 100%;
   height: 48px;
-  background-color: var(--color-accent);
-  color: #fff;
-  font-weight: 700;
   border-radius: 8px;
+
+  font-weight: 700;
+  color: #fff;
+
+  background-color: var(--color-accent);
+
   transition: opacity 0.3s ease;
 
   &:hover {
@@ -147,13 +158,15 @@
 .cartItem {
   display: flex;
   flex-direction: row;
+  gap: 16px;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+
   padding: 16px 24px;
-  background-color: var(--bg-surface);
   border: 2px solid var(--color-elements);
   border-radius: 8px;
+
+  background-color: var(--bg-surface);
 
   @include on-phone {
     flex-direction: column;
@@ -162,13 +175,16 @@
 }
 
 .deleteBtn {
-  background: transparent;
-  border: none;
-  padding: 0;
   cursor: pointer;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  padding: 0;
+  border: none;
+
+  background: transparent;
 
   &:hover {
     .closeIcon {
@@ -179,9 +195,9 @@
 
 .info {
   display: flex;
-  align-items: center;
-  gap: 16px;
   flex-grow: 1;
+  gap: 16px;
+  align-items: center;
 }
 
 .productImage {
@@ -191,40 +207,43 @@
 }
 
 .itemName {
+  margin: 0;
   font-size: 14px;
   font-weight: 600;
   color: var(--text-main);
-  margin: 0;
 }
 
 .controls {
   display: flex;
+  gap: 24px;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
 }
 
 .quantityCounter {
   display: flex;
-  align-items: center;
   gap: 12px;
+  align-items: center;
 
   span {
     min-width: 16px;
-    text-align: center;
     font-weight: 600;
+    text-align: center;
   }
 }
 
 .button {
-  width: 32px;
-  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
-  border-radius: 6px;
+
+  width: 32px;
+  height: 32px;
   border: 2px solid var(--color-icons);
+  border-radius: 6px;
+
+  background-color: #fff;
+
   transition: all 0.3s ease;
 
   &:hover {
@@ -233,9 +252,9 @@
   }
 
   &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
     pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.5;
   }
 
   :global(.dark-theme) & {

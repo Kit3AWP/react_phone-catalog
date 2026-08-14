@@ -1,13 +1,17 @@
 @mixin icon-mask($url, $size: 16px) {
   display: inline-block;
+
   width: $size;
   height: $size;
-  mask-image: url($url);
-  mask-size: contain;
-  mask-repeat: no-repeat;
-  mask-position: center;
+
   background-color: var(--text-main);
+
   transition: background-color 0.3s ease;
+
+  mask-image: url($url);
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
 }
 
 $breakpoint-tablet: 1199px;

@@ -5,20 +5,24 @@
 }
 
 .card {
-  min-width: 0;
+  cursor: pointer;
+
   display: flex;
   flex-direction: column;
-  background-color: var(--bg-surface);
-  border-radius: 8px;
+
+  min-width: 0;
   padding: 32px;
   border: 2px solid var(--color-elements);
-  cursor: pointer;
+  border-radius: 8px;
+
+  background-color: var(--bg-surface);
+
   transition: all 0.3s ease;
 
   &:hover {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
     transform: translateY(-6px);
     border-color: var(--text-main);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   }
 
    :global(.dark-theme) & {
@@ -34,30 +38,36 @@
     box-shadow: 0 0 20px rgba(235, 87, 87, 0.6);
 
     &::before {
+      pointer-events: none;
       content: 'SUS ඞ';
+
       position: absolute;
+      z-index: 2;
       top: 10px;
       right: 10px;
-      background-color: #eb5757;
-      color: #ffffff;
-      font-size: 10px;
-      font-weight: 700;
+
       padding: 2px 6px;
       border-radius: 4px;
-      z-index: 2;
-      pointer-events: none;
+
+      font-size: 10px;
+      font-weight: 700;
+      color: #fff;
+
+      background-color: #eb5757;
+
       animation: fadeIn 0.2s ease-in-out;
     }
   }
 }
 
 .imageWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: 100%;
   height: 200px;
   margin-bottom: 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .image {
@@ -67,11 +77,12 @@
 }
 
 .title {
-  font-size: 14px;
-  line-height: 21px;
   min-height: 42px;
-  font-weight: 500;
   margin-bottom: 8px;
+
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
   color: var(--text-main);
 }
 
@@ -91,15 +102,15 @@
   font-size: 22px;
   font-weight: 400;
   line-height: 100%;
-  text-decoration: line-through;
-  color: var(--text-secondary)
+  color: var(--text-secondary);
+  text-decoration: line-through
 }
 
 .divider {
-  border: none;
-  background-color: var(--color-elements);
   height: 1.5px;
   margin: 8px 0;
+  border: none;
+  background-color: var(--color-elements);
 }
 
 .specs {
@@ -129,20 +140,24 @@
 }
 
 .buttons {
+  cursor: default;
   display: flex;
   gap: 8px;
-  cursor: default;
 }
 
 .addToCartBtn {
   flex: 1;
-  background-color: var(--color-accent);
-  color: #fff;
+
   border-radius: 6px;
+
   font-size: 14px;
   font-weight: 500;
   line-height: 21px;
+  color: #fff;
+
+  background-color: var(--color-accent);
   outline: none;
+
   transition: all 0.3s ease;
 
   &:hover {
@@ -154,8 +169,8 @@
   }
 
   &.added {
-    color: #27AE60;
     border: 2px solid var(--color-accent);
+    color: #27AE60;
     background-color: var(--bg-surface);
 
     .textAdded {
@@ -185,9 +200,9 @@
     }
 
     &.added {
-      background-color: var(--color-icons);
       border: transparent;
       color: #fff;
+      background-color: var(--color-icons);
 
       &:hover {
         color: #EB5757;
@@ -197,16 +212,19 @@
 }
 
 .favoritesBtn {
-  width: 40px;
-  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
-  border-radius: 6px;
+
+  width: 40px;
+  height: 40px;
   border: 2px solid var(--color-icons);
-  outline: none;
+  border-radius: 6px;
+
   backface-visibility: hidden;
+  background-color: #fff;
+  outline: none;
+
   transition: all 0.3s ease;
 
   &:hover {
@@ -221,6 +239,7 @@
   &.active {
     .favoritesIcon {
       background-color: #EB5757;
+
       mask-image: url('/icons/heart-filled.svg');
     }
   }
